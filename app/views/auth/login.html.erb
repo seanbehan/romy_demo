@@ -1,0 +1,6 @@
+<h1>Login</h1>
+<%= form_for :user, url: login_path do |f| %>
+  <%= f.email_field :email , placeholder: "Email" %>
+  <%= f.password_field :password , placeholder: "Email" %>
+  <%= f.submit "Login" %>
+<% end %>
