@@ -1,0 +1,31 @@
+<div class="right gray">
+  <span class="info">
+    <i class="fa fa-calendar-alt" style="transform:rotate(-5deg)"></i>
+    <%= Time.now.stamp('10.10.2019') %> &nbsp; &nbsp;
+  </span>
+</div>
+
+<br>
+
+<h3 class="transaction-form-tab">
+  <span class="label">
+    <i class="fas fa-file-invoice-dollar" style="transform:rotate(-5deg)"></i>
+    Edit transaction.. “<%= current_transaction.category %>”
+  </span>
+</h3>
+
+<div class="edit-transaction">
+  <%= form_for current_transaction do |f| %>
+    <%= f.date_field :date %>
+    <%= f.text_field :amount, value: number_to_currency(current_transaction.amount_in_dollars), placeholder: "Enter Amount" %>
+    <%= f.text_field :category, placeholder: "Category (Name)" %>
+
+    <button>Save</button>
+  <% end %>
+</div>
+
+<blockquote class="animated fadeInDown">
+  <span class="quote">“</span>You miss 100% of the shots you don't take
+  <small>&mdash; <cite>Wayne Gretzky</cite></small><span class="quote">”</span>
+  <div class="cite">&mdash; <cite>Michael Scott</cite></div>
+</blockquote>

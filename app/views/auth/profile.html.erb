@@ -1,0 +1,41 @@
+<div class="profile animated fadeIn">
+  <div class="center">
+    <h1><i class="fas fa-clipboard-list"></i> Complete Your Profile</h1>
+  </div>
+
+  <%= form_for current_user, url: profile_path do |f| %>
+    <div class="center">
+      <p>
+        Please complete the form to finish setting up your profile.
+      </p>
+    </div>
+
+    <div class="row">
+      <%= f.label :income, "Your Monthly Income" %>
+      <%= f.text_field :income, value: number_to_currency(current_user.income_in_dollars), placeholder: "E.g., $4,500", autofocus:true, autoselect:true %>
+    </div>
+
+    <div class="row">
+      <%= f.label :expenses, "Enter Your Total Monthly Expenses" %>
+      <%= f.text_field :expenses, value: number_to_currency(current_user.expenses_in_dollars), placeholder: "E.g., $1,800" %>
+    </div>
+
+    <div class="row">
+      <%= f.label :budget, "Set Your Monthly Budget?" %>
+      <%= f.text_field :budget, value: number_to_currency(current_user.budget_in_dollars), placeholder: "E.g., $1,200" %>
+    </div>
+
+
+    <div class="center"><h3><i class="fas fa-id-card-alt"></i> Confirm Your Contact Info</h3></div>
+
+    <div class="row">
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+    </div>
+
+    <div class="row actions center">
+      <button>Save &amp; Continue <i class="fa fa-arrow-right"></i></button>
+    </div>
+  <% end %>
+
+</div>

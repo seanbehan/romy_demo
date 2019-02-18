@@ -1,0 +1,6 @@
+<% @errors.each do |error| %>
+  <div class="error animated fadeInLeft">
+    <i class="fas fa-exclamation-triangle"></i>
+    <%= error %>
+  </div>
+<% end if @errors %>

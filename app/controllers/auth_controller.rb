@@ -1,5 +1,13 @@
 class AuthController < ApplicationController
-  skip_before_action :require_current_user
+  skip_before_action :require_current_user, except: [:profile]
+
+  def profile
+    return unless request.patch?
+    current_user.update(params_for(User))
+    flash[:message] = "Profile updated"
+    redirect_to current_user.profile_complete? ? transactions_path : profile_path
+  end
+
   def login
     return unless request.post?
     @user = User.where(email:params[:user][:email]).first
@@ -7,7 +15,7 @@ class AuthController < ApplicationController
       session[:user_id] = @user.id
       redirect_to after_login_or_signup_path
     else
-      @errors = ["Unable to login with that email/password combo"]
+      @errors = ["Unable to login"]
     end
   end
 
@@ -15,7 +23,8 @@ class AuthController < ApplicationController
     return unless request.post?
 
     @user = User.new(params_for(User))
-    if @user.save
+
+    if @user.save 
       session[:user_id] = @user.id
       redirect_to after_login_or_signup_path
     else
@@ -25,7 +34,6 @@ class AuthController < ApplicationController
 
   def logout
     session.clear
-    flash[:message] = "Thanks for visiting!"
     redirect_to login_path
   end
 

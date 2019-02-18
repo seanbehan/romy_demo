@@ -1,6 +1,19 @@
-<h1>Join</h1>
-<%= form_for :user, url: join_path do |f| %>
-  <%= f.email_field :email , placeholder: "Email" %>
-  <%= f.password_field :password , placeholder: "Email" %>
-  <%= f.submit "Join" %>
-<% end %>
+
+<div class="box animated fadeInUp">
+  <%= form_for :user, url: join_path do |f| %>
+    <%= render 'errors' %>
+
+    <small style="color:#999">New Account</small>
+    <h1>Sign up for a free account!</h1>
+
+    <p>
+      With The Little Piglet, it's easy to keep track of finances and stay on budget.
+      Try it free today!
+    </p>
+
+    <%= f.email_field :email , placeholder: "Email", autofocus:true %>
+    <%= f.password_field :password , placeholder: "*******" %>
+
+    <button>Join <i class="fa fa-arrow-right"></i></button>
+  <% end %>
+</div>

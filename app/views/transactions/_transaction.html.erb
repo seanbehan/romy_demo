@@ -1,0 +1,18 @@
+<div class="transaction">
+  <div class="date">
+    <%= transaction.date.stamp('Mon Jun 1st') %>
+  </div>
+  <div class="amount">
+    <%= number_to_currency transaction.amount_in_dollars %>
+  </div>
+  <div class="category"><%= transaction.category -%></div>
+
+  <div class="actions">
+    <%= link_to edit_transaction_path(transaction), class: "edit" do %>
+      <i class="fa fa-user-edit"></i>
+    <% end %>
+    <%= link_to transaction, method: 'delete', data: { confirm: "Are you sure?" }, class: "delete" do %>
+      <i class="fa fa-trash"></i>
+    <% end %>
+  </div>
+</div>

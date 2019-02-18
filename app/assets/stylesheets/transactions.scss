@@ -1,3 +1,463 @@
-// Place all the styles related to the transactions controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import url(https://use.fontawesome.com/releases/v5.7.2/css/all.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css);
+
+* { box-sizing: border-box; }
+
+#logo {
+  margin:0px;
+  color:gray;
+  font-weight:300;
+
+  .the {
+    display:inline-block;
+    position:absolute;
+    margin-left:-10px;
+    margin-top:-5px;
+    color:#D7369E;
+    font-size:12px;
+    transform:rotate(-10deg);
+  }
+  .com {
+    color:#ccc;
+    font-size:12px;
+  }
+}
+
+body.public {
+  background: url(/piggy.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body {
+  margin:0px;
+  font-family:helvetica;
+  color:#454545;
+  font-weight:300;
+}
+
+a {
+  color:#3ABCD2;
+  text-decoration:none;
+  &.bordered {
+    padding:10px 25px;
+    background:rgb(215, 54, 158);
+    color:white;
+    border-radius:360px;
+  }
+}
+
+p {
+  color:#585555;
+}
+
+.center {
+  text-align:center;
+}
+
+.right {
+  float:right;
+}
+
+.gray {
+  color:#999;
+}
+
+.public {
+  h1,h2,h3,h4{
+    font-weight:300;
+    margin:0px
+  }
+}
+
+.menu {
+  padding:25px;
+  h2 {
+    display:inline-block;
+    position:relative;
+    top:4px;
+    left:10px;
+  }
+  .right {
+    color:gray;
+    float:right;
+    span.info {
+      color:#999;
+      font-weight:300;
+    }
+  }
+}
+
+.application {
+  .menu {
+    background:rgba(#f9f9f9, 0.5);
+    margin-bottom:30px;
+    font-weight:bold;
+    box-shadow:0px 0px 10px rgb(255, 210, 249);
+    a {
+      color:rgb(215, 54, 158);
+      background:rgba(215, 54, 158, 0.05);
+      background:white;
+      padding:10px 20px;
+      border-radius:5px;
+      border:solid 2px rgba(#d7369e, 0.20);
+    }
+  }
+
+  button {
+    background:rgb(215, 54, 158);
+    color:white;
+    padding:10px 25px;
+    border-radius:360px;
+    border:none;
+    font-size:20px;
+  }
+}
+
+.page {
+  width:960px;
+  margin:0px auto;
+}
+
+.page .box {
+  width:450px;
+  margin-top:110px;
+  padding:30px 0px;
+}
+
+.application .menu { background:white;}
+
+body { background:rgba(#fff6fe, 0.33); }
+.transactions {
+  border:solid 1px #EEE;
+  border-top:0px;
+  background:white;
+  padding:20px;
+
+  h2 {
+    position:relative;
+    left:-10px;
+    color:#812962;
+    color:#765790;
+    margin-bottom:0px;
+    margin-top:30px;
+  }
+
+  .kpis h3 {
+    display:inline-block;
+    width:24%;
+    padding:5px;
+    border-left:solid 2px #EEE;
+    padding-left:15px;
+
+    span {
+      color:gray;
+      font-weight:300;
+    }
+  }
+
+  .head {
+    background:whitesmoke;
+    padding:10px;
+    color:gray;
+    text-shadow:1px 1px 0px white;
+  }
+
+  b {
+
+    width:24.5%;
+    display:inline-block;
+  }
+
+  .negative-balance {
+    color:rgb(247, 90, 7);
+  }
+  .positive-balance {
+    color:rgb(21, 185, 111);
+  }
+  .over-budget {
+    color:rgb(247, 90, 7);
+  }
+  .under-budget{
+    color:rgb(21, 185, 111);
+  }
+}
+
+.transactions .transaction:nth-child(even){
+  background:rgba(224, 238, 255, 0.28);
+}
+
+.transaction {
+  width:100%;
+  border-bottom:solid 1px #EEE;
+  padding:0px;
+
+  div {
+    width:24.5%;
+    padding:10px;
+    display:inline-block;
+  }
+  .actions {
+    text-align:right;
+    a {
+      margin-left:10px;
+    }
+  }
+}
+
+.category:empty {
+  background:rgba(#71c681, 0.36);
+  padding:4px;
+  border-radius:360px;
+}
+
+.public form {
+  border-left:solid 2px #EEE;
+  padding:30px 30px 60px;
+
+  div {
+    margin:10px;
+  }
+  label {
+    display:block;
+  }
+  input {
+    width:100%;
+    margin:10px 0px;
+    display:block;
+    background:white;
+    background:#E8F0FD;
+    border:solid 2px #fff;
+
+    padding:10px;
+    border-radius:5px;
+    font-size:22px;
+
+    outline:none;
+    &:focus {
+      border-bottom:solid 2px #D7379E;
+    }
+  }
+
+  button {
+    float:right;
+    font-size:20px;
+    cursor:pointer;
+    background:rgb(215, 54, 158);
+    color:white;
+    padding:10px 20px;
+    border-radius:5px;
+    border:none;
+  }
+}
+
+.help {
+  padding:10px;
+  background:whitesmoke;
+  border-radius:5px;
+  margin:30px 0px;
+}
+
+.transaction-form-tab {
+  text-shadow:1px 1px 0px #454545;
+  background:#D7369E;
+  display:inline;
+  position:relative;
+  top:5px;
+  left:35px;
+  padding:5px 15px;
+  border-radius:5px 5px 0px 0px;
+  color:white;
+
+  .label {
+    position:relative;
+    top:4px;
+  }
+}
+
+.new-transaction, .edit-transaction {
+  background:rgb(9, 96, 166);
+  background:rgba(#d7369e, 0.1);
+  padding:10px;
+  border-radius:5px;
+  h1 {
+    font-weight:300;
+    i {
+      transform:rotate(-5deg);
+    }
+  }
+  form {
+    background:#D7369E;
+    padding:25px;
+    border-radius: 5px;
+  }
+  input {
+
+
+    min-width:29%;
+    text-align:center;
+    font-size:20px;
+    padding:10px;
+    border:solid 3px #ebcde0;
+    border-radius:5px;
+    margin:0px!important;
+
+    &::placeholder {
+      color:#ccc;
+      color:#999;
+    }
+  }
+  input[type=date] {
+    position:relative;
+    top:-2px;
+    padding:6px 10px;
+  }
+  button {
+    margin:0px;
+    padding:8px 15px;
+    background:rgb(119, 8, 81);
+    background:#3ABCD2;
+    color:white;
+    border-radius:5px;
+    border-bottom:solid 3px #188395;
+    cursor:pointer;
+
+    &:hover {
+      background:#0cb4d0;
+    }
+  }
+
+  small {
+    color:#D7369E;
+    font-family:arial;
+    position:relative;
+    top:4px;
+    left:4px;
+  }
+}
+
+.new-transaction{
+
+  border-radius:10px 10px 0px 0px!important;
+  // border-bottom:solid 2px #f8f8f8;
+  // box-shadow:inset 0px 0px 10px rgba(#e6c1d9, 0.71);
+}
+
+.application .profile {
+  width:600px;
+
+
+  margin:0px auto;
+  form {
+    background:white;
+    box-shadow:0px 0px 10px #eee;
+    border-radius:5px;
+    padding:15px 50px 30px;
+    width:100%;
+    border-left:solid 5px #EEE;
+    .row {
+      margin:20px 0px 0px;
+
+      label, input {
+        outline:none;
+        display:block;
+        font-size:14px;
+      }
+      label {
+        background:whitesmoke;
+        width:70%;
+        padding:5px 2px 0px;
+        border-radius:0px;
+        position:relative;
+        top:0px;
+        left:10px;
+        color:gray;
+        text-transform: uppercase;
+      }
+      input {
+        width:100%;
+        padding:10px;
+        border:solid 2px #EEE;
+        border-radius:5px;
+        font-size:20px;
+
+        &:focus {
+          border-bottom:solid 2px #D7379E;
+        }
+      }
+      .row.actions {
+        text-align:center;
+      }
+    }
+  }
+}
+
+
+form {
+  .error {
+    background:orange;
+    width:75%;
+    color:white;
+    font-weight:bold;
+    padding:5px;
+    position:relative;
+    left:-30px;
+    text-shadow:1px 1px 0px #999;
+    transform:rotate(-1deg);
+    border-radius:2px 5px;
+    border-bottom:solid 2px darkorange;
+  }
+}
+
+.flash {
+  background:linear-gradient(rgb(47, 221, 25), rgb(40, 195, 20));
+  padding:10px;
+  border-radius:5px;
+  font-weight:bold;
+  color:white;
+  text-shadow:1px 1px 0px #999;
+  &:empty {
+    display:none;
+  }
+}
+
+blockquote {
+  font-size:30px;
+  width:500px;
+  text-align:center;
+  margin:100px auto;
+  color:rgb(162, 125, 193);
+  padding:0px;
+  text-shadow:1px 1px 0px white;
+}
+blockquote .quote {
+  font-size:50px;
+  font-weight:bold;
+}
+blockquote .cite {
+  text-align:right;
+}
+
+.footer {
+  padding:40px;
+  color:gray;
+  font-size:12px;
+  text-align:center;
+  margin-top:100px;
+  color:#A27DC1;
+}
+
+.public .footer { display:none; }
+.field_with_errors { margin:0px !important; padding:0px!important; width:100%; }
+
+#welcome {
+  background:white;box-shadow:0px 0px 10px #EEE;border-radius:5px;
+  .help {
+    border:solid 1px #eee;border-bottom:none;border-radius:5px 5px 0px 0px;
+  }
+}
+h1,h2,h3 {
+  text-shadow:1px 1px 0px white;
+}

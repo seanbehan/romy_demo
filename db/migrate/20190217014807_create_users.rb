@@ -4,9 +4,9 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :email
       t.string :password
-      t.integer :income
-      t.integer :budget
-      t.integer :expenses
+      t.integer :income, default: 0
+      t.integer :budget, default: 0
+      t.integer :expenses, default: 0
 
       t.timestamps
     end

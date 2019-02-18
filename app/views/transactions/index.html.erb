@@ -1,0 +1,94 @@
+<div class="right gray">
+  <span class="info">
+    <i class="fa fa-calendar-alt" style="transform:rotate(-5deg)"></i>
+    <%= Time.now.stamp('10.10.2019') %> &nbsp; &nbsp;
+  </span>
+</div>
+
+<br>
+
+<h3 class="transaction-form-tab">
+  <span class="label">
+    <i class="fas fa-file-invoice-dollar" style="transform:rotate(-5deg)"></i>
+    Log a new transaction..
+  </span>
+</h3>
+
+<div class="new-transaction">
+  <%= form_for Transaction.new(date: Time.now) do |f| %>
+    <%= f.date_field :date %>
+    <%= f.text_field :amount, placeholder: "Amount: E.g., $25.50" %>
+    <%= f.text_field :category, placeholder: "Category (Name)" %>
+    <button><i class="fa fa-plus-circle"></i> Add</button>
+  <% end %>
+
+  <small>
+    &nbsp;
+    <i>Enter a date, the amount spent and a category or label name for the transaction</i>
+  </small>
+</div>
+
+<% if current_user.transactions.any? %>
+  <div class="transactions">
+    <% current_user.transactions.order('date desc, created_at desc').group_by { |transaction| transaction.date.stamp('January 2019') }.each do |date, transactions| %>
+      <div class="collection">
+        <% collection = TransactionsHelper::TransactionCollection.new(transactions, current_user) %>
+        <div class="kpis">
+          <h2> <i class="fa fa-calendar-alt" style="transform:rotate(-6deg)"></i> <%= date %> </h2>
+          <h3><span>Income - Expenses</span> <br><%= number_to_currency collection.income_less_expenses %></h3>
+          <h3><span>Spend </span><br><%= number_to_currency collection.spend %> </h3>
+
+          <% if collection.percent_of_budget > 100 %>
+            <h3 class="over-budget"><span>Budget (<%= number_to_currency collection.budget_in_dollars.to_i %> )</span> <br> <%= number_to_percentage collection.percent_of_budget, precision:0 %> over budget</h3>
+          <% else %>
+            <h3 class="under-budget"><span>Budget (<%= number_to_currency collection.budget_in_dollars.to_i %> )</span> <br> <%= number_to_percentage collection.percent_of_budget, precision:0 %></h3>
+          <% end %>
+
+          <% if collection.balance_remaining <= 0 %>
+            <h3 class="negative-balance animated pulse"><span>Balance </span><br><%= number_to_currency collection.balance_remaining %></h3>
+          <% else %>
+            <h3 class="positive-balance"><span>Balance </span><br><%= number_to_currency collection.balance_remaining %></h3>
+          <% end %>
+        </div>
+
+        <div class="head">
+          <b>Date</b>
+          <b>Amount Spent</b>
+          <b>Category</b>
+        </div>
+
+        <%= render transactions %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="welcome">
+    <div class="help center">
+      <h1><i class="fas fa-magic"></i> Let's Get Started</h1>
+      <p>
+        &nbsp; Using the form above, enter a date, an amount spent and optionally, a category name. We use your profile information
+        to track monthly spending and help keep you on budget!
+      </p>
+    </div>
+
+      <div class="animated fadeInUp">
+      <table style="width:100%">
+        <% rand(5..12).times do %>
+          <tr>
+            <% 4.times do %>
+              <td style='border-bottom:solid 1px #EEE;padding:5px;'>
+                <div style="width:<%= rand(50..80) %>%;background:whitesmoke;padding:5px;font-weight:bold;color:#CCC;transform:rotate(<%= rand(-1..1)%>deg)">
+                  <%= ["&nbsp;", "-", "-", "&mdash;", "&mdash;"].sort_by { rand }.join(" ").html_safe %>
+                </div>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+      <center>
+        <p><small>No transactions yet <i class="fas fa-bacon"></i></small></p>
+      </center>
+      <br>
+    </div>
+  </div>
+<% end %>
